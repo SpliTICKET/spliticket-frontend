@@ -1,7 +1,7 @@
 {
-  "dashboard": "Übersicht",
-  "animals": "Tiere",
-  "enclosures": "Gehege",
-  "species": "Spezies",
-  "size(LxWxH)": "Maße (LxBxH)"
+	"dashboard": "Übersicht",
+	"animals": "Tiere",
+	"enclosures": "Gehege",
+	"species": "Spezies",
+	"size(LxWxH)": "Maße (LxBxH)"
 }
