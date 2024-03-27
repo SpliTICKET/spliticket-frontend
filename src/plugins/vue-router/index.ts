@@ -6,6 +6,7 @@ import AnimalDetailPage from "@/pages/AnimalDetailPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import RegisterPage from "@/pages/RegisterPage.vue";
 import HomePage from "@/pages/HomePage.vue";
+import EnclosureDetailPage from "@/pages/EnclosureDetailPage.vue";
 
 export const router = createRouter({
 	history: createWebHistory("/"),
@@ -63,6 +64,14 @@ export const router = createRouter({
 			component: EnclosuresPage,
 			meta: {
 				breadcrumb: [{ name: "Enclosures" }],
+			},
+		},
+		{
+			path: "/enclosure/:enclosureId/:enclosureName",
+			name: "Enclosure",
+			component: EnclosureDetailPage,
+			meta: {
+				breadcrumb: [{ name: "Enclosures", link: "/enclosures" }, { name: ":enclosureName" }],
 			},
 		},
 	],
