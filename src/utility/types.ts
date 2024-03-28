@@ -11,6 +11,7 @@ export type animalType = {
 	name: string;
 	species: string;
 	enclosureId?: string;
+	enclosure?: enclosureType;
 };
 
 export type enclosureType = {
@@ -19,4 +20,5 @@ export type enclosureType = {
 	length: number;
 	width: number;
 	height: number;
+	residents?: animalType[];
 };

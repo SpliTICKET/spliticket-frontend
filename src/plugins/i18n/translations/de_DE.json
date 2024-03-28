@@ -1,7 +1,9 @@
 {
 	"dashboard": "Übersicht",
 	"animals": "Tiere",
+	"enclosure": "Gehege",
 	"enclosures": "Gehege",
 	"species": "Spezies",
-	"size(LxWxH)": "Maße (LxBxH)"
+	"size(LxWxH)": "Maße (LxBxH)",
+	"residents": "Bewohner"
 }

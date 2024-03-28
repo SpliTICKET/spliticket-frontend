@@ -21,9 +21,22 @@ const enclosure: enclosureType = await getEnclosure(props.enclosureId);
 					<h2 class="text-xl font-bold">{{ $t("size(LxWxH)") }}</h2>
 					<h3 class="text-l">{{ enclosure.length }} x {{ enclosure.width }} x {{ enclosure.height }} cm</h3>
 				</div>
-				{{ enclosure }}
+
+				<!--				{{ enclosure }}-->
 			</div>
-			<div class="w-1/2"></div>
+			<div class="w-1/2 p-6 flex flex-col gap-4">
+				<h1 class="text-4xl font-bold">&nbsp;</h1>
+				<div>
+					<h2 class="text-xl font-bold">{{ $t("residents") }}</h2>
+					<ul class="pt-1 pl-6">
+						<li v-for="resident in enclosure.residents" :key="resident.animalId">
+							<RouterLink :to="'/animal/' + resident.animalId + '/' + resident.name">
+								{{ resident.name }} <span class="text-gray-400">{{ resident.species }}</span>
+							</RouterLink>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
