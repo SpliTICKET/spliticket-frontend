@@ -1,13 +1,15 @@
 <script setup lang="ts">
 defineProps<{
-	propName: string;
+	h2: string;
+	p: string;
 }>();
 </script>
 
 <template>
-	<div>
+	<div class="flex flex-col gap-4 p-5">
 		<h1 class="text-5xl">EmptyComponent</h1>
-		<h2>PropName: {{ propName }}</h2>
+		<h2 v-if="h2">{{ h2 }}</h2>
+		<p v-if="p">{{ p }}</p>
 	</div>
 </template>
 

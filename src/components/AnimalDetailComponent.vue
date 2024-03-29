@@ -33,8 +33,8 @@ const animal: animalType = await getAnimal(props.animalId);
 			<div class="w-1/2 p-6 flex flex-col gap-4">
 				<TabComponent
 					:tabs="[
-						{ name: 'Test1', component: EmtptyComponent, props: { propName: 'asfgdsdfhsed' } },
-						{ name: 'Test2', component: EmtptyComponent, props: { propName: '123123123' } },
+						{ name: 'Empty 1', component: EmtptyComponent, props: { h2: 'This is an EmptyComponent', p: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, modi!' } },
+						{ name: 'Empty 2', component: EmtptyComponent, props: { h2: 'This is another EmptyComponent', p: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, modi!' } },
 					]"
 				></TabComponent>
 			</div>

@@ -18,7 +18,7 @@ const selectedTab: Ref<number> = ref(0);
 			<li
 				v-for="(tab, i) in tabs"
 				:key="i"
-				class="cursor-pointer rounded-t-md px-4 py-0.5 "
+				class="cursor-pointer rounded-t-md px-4 py-0.5 whitespace-nowrap"
 				:class="selectedTab === i ? 'selectedTab' : 'notSelectedTab'"
 				@click="selectedTab = i"
 			>
