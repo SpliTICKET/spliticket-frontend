@@ -4,7 +4,7 @@ export default {
 	data() {
 		return {
 			breadcrumbList: [],
-		};
+		} as { breadcrumbList: { name: string; link: string }[] };
 	},
 	watch: {
 		$route() {
@@ -19,7 +19,10 @@ export default {
 			if (this.breadcrumbList[pRouteTo].link) this.$router.push(this.breadcrumbList[pRouteTo].link);
 		},
 		updateList() {
-			const breadcrumbs = this.$route.meta.breadcrumb;
+			const breadcrumbs: { name: string; link: string }[] = this.$route.meta.breadcrumb as {
+				name: string;
+				link: string;
+			}[];
 
 			this.breadcrumbList = breadcrumbs;
 
