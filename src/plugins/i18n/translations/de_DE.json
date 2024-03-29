@@ -1,4 +1,6 @@
 {
+	"login": "Login",
+	"register": "Registrierung",
 	"dashboard": "Übersicht",
 	"animals": "Tiere",
 	"enclosure": "Gehege",

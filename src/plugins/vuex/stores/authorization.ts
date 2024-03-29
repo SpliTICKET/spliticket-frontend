@@ -25,7 +25,7 @@ export const authorization = {
 		},
 		async register(context, inputUser) {
 			try {
-				await authService.login(inputUser);
+				await authService.register(inputUser);
 				const fetchedUser = await self();
 				context.commit("registerSuccess", fetchedUser);
 				return fetchedUser;

@@ -2,6 +2,7 @@
 import NavbarItemComponent from "@/components/NavbarItemComponent.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
+import { logout } from "@/services/authService";
 
 const store = useStore();
 
@@ -16,7 +17,15 @@ const user = computed(() => store.state.auth.user);
 			<NavbarItemComponent page-name="Animals"></NavbarItemComponent>
 			<NavbarItemComponent page-name="Enclosures"></NavbarItemComponent>
 			<span class="border-l-2 border-transparent bg-green-950"></span>
-			<div class="text-2xl">
+			<div
+				class="text-2xl cursor-pointer"
+				@click="
+					() => {
+						logout();
+						$router.go(0);
+					}
+				"
+			>
 				{{ user["firstName"] + " " + user["lastName"] }}
 			</div>
 		</div>
