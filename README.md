@@ -1,1 +1,1 @@
-# TerraTrack - Frontend
+# SpliTICKET - Frontend

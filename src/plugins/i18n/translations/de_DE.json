@@ -1,11 +1,5 @@
 {
 	"login": "Login",
 	"register": "Registrierung",
-	"dashboard": "Übersicht",
-	"animals": "Tiere",
-	"enclosure": "Gehege",
-	"enclosures": "Gehege",
-	"species": "Spezies",
-	"size(LxWxH)": "Maße (LxBxH)",
-	"residents": "Bewohner"
+	"dashboard": "Übersicht"
 }

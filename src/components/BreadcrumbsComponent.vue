@@ -33,9 +33,9 @@ export default {
 					? this.$route.params[lastBreadCrumb.name.split(":")[1]]
 					: this.$t(lastBreadCrumb.name.toLowerCase());
 
-				document.title = `TerraTrack | ${suffix}`;
+				document.title = `SpliTICKET | ${suffix}`;
 			} else {
-				document.title = "TerraTrack";
+				document.title = "SpliTICKET";
 			}
 		},
 	},
