@@ -2,7 +2,7 @@
 
 <template>
 	<div>
-		<h1 class="text-5xl text-center mb-10">{{ $t("dashboard") }}</h1>
+		<h1 class="text-5xl text-center mb-10">{{ $t("Dashboard") }}</h1>
 		<div class="w-full h-full flex justify-center items-center gap-8"></div>
 	</div>
 </template>

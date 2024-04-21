@@ -37,18 +37,18 @@ const handleLogin = () => {
 			class="flex flex-col gap-4 items-center justify-center shadow-2xl shadow-black rounded-xl p-6"
 			@submit.prevent="handleLogin"
 		>
-			<h1 class="text-4xl pb-3">Login</h1>
+			<h1 class="text-4xl pb-3">{{ $t("Login") }}</h1>
 			<div class="formRow">
-				<label for="username">Username</label>
+				<label for="username">{{ $t("Username") }}</label>
 				<input v-model="user.username" type="text" name="username" required />
 			</div>
 			<div class="formRow">
-				<label for="password">Password</label>
+				<label for="password">{{ $t("Password") }}</label>
 				<input v-model="user.password" type="password" name="password" required />
 			</div>
 			<div>
 				<button :disabled="loading" class="border-2 rounded px-2">
-					<span>Login</span>
+					<span>{{ $t("Login") }}</span>
 				</button>
 			</div>
 			<div class="flex flex-col text-sm items-center">

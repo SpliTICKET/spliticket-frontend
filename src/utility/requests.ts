@@ -40,3 +40,17 @@ export function postRequest(endpoint: string, data: object) {
 			});
 	});
 }
+
+export function patchRequest(endpoint: string, data: object) {
+	return new Promise((resolve, reject) => {
+		axios
+			.patch(buildUrl(endpoint), JSON.stringify(data), {
+				headers: Object.assign({ "Content-Type": "application/json" }, authHeader()),
+			})
+			.then((response: AxiosResponse) => resolve(response.data))
+			.catch((error: AxiosResponse) => {
+				if (error.response.status === 401) localStorage.removeItem("accessToken");
+				reject(error);
+			});
+	});
+}

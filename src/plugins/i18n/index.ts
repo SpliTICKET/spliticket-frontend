@@ -18,7 +18,7 @@ const messages = {
 let _i18n: I18n;
 
 function setup(options = { locale: defaultLocale }) {
-	_i18n = createI18n<[typeof de_DE], string>({
+	_i18n = createI18n<typeof de_DE, string>({
 		fallbackLocale: defaultLocale,
 		locale: "de_DE",
 		messages,

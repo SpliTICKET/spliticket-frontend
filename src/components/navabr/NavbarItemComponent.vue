@@ -1,16 +1,18 @@
 <script setup lang="ts">
 interface NavbarItemProps {
-	pageName: string;
+	to: string;
+	label: string;
 }
 
 withDefaults(defineProps<NavbarItemProps>(), {
-	pageName: "home",
+	to: "Home",
+	label: "Home",
 });
 </script>
 
 <template>
-	<RouterLink :to="{ name: pageName }">
-		{{ $t(pageName.toLowerCase()) }}
+	<RouterLink :to="{ name: to }">
+		{{ label }}
 	</RouterLink>
 </template>
 
