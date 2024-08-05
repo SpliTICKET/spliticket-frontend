@@ -6,8 +6,7 @@ import HomePage from "@/pages/HomePage.vue";
 import SplitListPage from "@/pages/splits/SplitListPage.vue";
 import SplitDetailPage from "@/pages/splits/SplitDetailPage.vue";
 import ArtistListPage from "@/pages/artists/ArtistListPage.vue";
-import { useStore } from "vuex";
-import { computed } from "vue";
+import ArtistDetailPage from "@/pages/artists/ArtistDetailPage.vue";
 
 export const router = createRouter({
 	history: createWebHistory("/"),
@@ -47,6 +46,11 @@ export const router = createRouter({
 			path: "/artists",
 			name: "Artists",
 			component: ArtistListPage,
+		},
+		{
+			path: "/artist/:artistId",
+			name: "Artist",
+			component: ArtistDetailPage,
 		},
 	],
 });

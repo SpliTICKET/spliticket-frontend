@@ -1,7 +1,7 @@
 import { createI18n } from "vue-i18n";
 import type { I18n } from "vue-i18n";
-import de_DE from "@/plugins/i18n/translations/de_DE.json";
-import en_US from "@/plugins/i18n/translations/en_US.json";
+import de_DE from "@/i18n/translations/de_DE.json";
+import en_US from "@/i18n/translations/en_US.json";
 
 export const defaultLocale = "de_DE";
 

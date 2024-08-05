@@ -19,6 +19,7 @@ const store = useStore();
 const user = computed(() => store.state.auth.user || { username: "" });
 
 const isModalOpened = ref(false);
+const newParticipantName = ref("");
 
 const openModal = () => {
 	isModalOpened.value = true;
@@ -76,6 +77,10 @@ const saveSplit = async () => {
 			</div>
 			<div v-if="split.owner!.username === user.username">
 				<button @click="openModal">Bearbeiten</button>
+			</div>
+			<div v-else>
+				<input v-model="newParticipantName" />
+				<button @click="() => console.log(newParticipantName)">Setz mich auf die Liste!</button>
 			</div>
 
 			<ModalComponent :is-open="isModalOpened" name="first-modal" @click-outside="closeModal">

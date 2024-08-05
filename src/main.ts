@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
-import { router } from "@/plugins/vue-router";
-import i18n from "@/plugins/i18n";
-import { store } from "@/plugins/vuex";
+import { router } from "@/router";
+import i18n from "@/i18n";
+import { store } from "@/store";
 
 const app = createApp(App);
 

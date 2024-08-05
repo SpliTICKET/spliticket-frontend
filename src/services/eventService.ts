@@ -1,5 +1,5 @@
-import { getRequest } from "@/utility/requests";
-import type { eventType } from "@/utility/types";
+import { getRequest } from "@/requests";
+import type { eventType } from "@/types";
 
 export function getEvents(): Promise<eventType[]> {
 	return getRequest("/event").catch(() => null) as Promise<eventType[]>;

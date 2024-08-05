@@ -1,4 +1,4 @@
-import { authorization } from "@/plugins/vuex/stores/authorization";
+import { authorization } from "@/store/modules/authorization";
 
 import { createStore } from "vuex";
 

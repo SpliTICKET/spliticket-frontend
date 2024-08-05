@@ -1,4 +1,4 @@
-import { postRequest } from "@/utility/requests";
+import { postRequest } from "@/requests";
 
 export function login(user: { username: string; password: string }) {
 	return postRequest("login", {

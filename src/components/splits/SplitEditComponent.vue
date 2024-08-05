@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { eventType, splitType } from "@/utility/types";
+import type { eventType, splitType } from "@/types";
 import { getEvents } from "@/services/eventService";
 
 defineProps<{

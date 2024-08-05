@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import type { userType } from "@/utility/types";
+import type { userType } from "@/types";
 
 const router = useRouter();
 

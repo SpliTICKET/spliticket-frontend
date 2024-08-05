@@ -1,5 +1,5 @@
-import { getRequest, patchRequest, postRequest } from "@/utility/requests";
-import type { splitType } from "@/utility/types";
+import { getRequest, patchRequest, postRequest } from "@/requests";
+import type { splitType } from "@/types";
 
 export function getSplits(): Promise<splitType[]> {
 	return getRequest("/split").catch(() => null) as Promise<splitType[]>;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { splitType } from "@/utility/types";
+import type { splitType } from "@/types";
 import { getSplits, postSplit } from "@/services/splitService";
 import ModalComponent from "@/components/ModalComponent.vue";
 import SplitEditComponent from "@/components/splits/SplitEditComponent.vue";
