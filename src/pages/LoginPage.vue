@@ -4,7 +4,6 @@ import { useStore } from "vuex";
 import type { userType } from "@/types";
 
 const router = useRouter();
-
 const store = useStore();
 
 const user: userType = {
@@ -19,7 +18,7 @@ const handleLogin = () => {
 	loading = true;
 	if (user.username && user.password) {
 		store
-			.dispatch("auth/login", user)
+			.dispatch("auth/login", user) // namespaced Module -> "auth/login"
 			.then(() => {
 				router.push({ path: "/dashboard" });
 			})

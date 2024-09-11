@@ -1,12 +1,12 @@
 import axios, { type AxiosResponse } from "axios";
-import { useStore } from "vuex";
+import { store } from "@/store";
 
 function buildUrl(endpoint: string) {
 	return `/api/${endpoint}`.replaceAll(/\/+/g, "/");
 }
 
 function authHeader() {
-	const accessToken = localStorage.getItem("accessToken");
+	const accessToken = store.state.auth.token;
 
 	if (accessToken) {
 		return { Authorization: "Bearer " + accessToken };
@@ -15,42 +15,32 @@ function authHeader() {
 	}
 }
 
-export function getRequest(endpoint: string) {
+function request(method: "get" | "post" | "patch", endpoint: string, data?: object) {
 	return new Promise((resolve, reject) => {
-		axios
-			.get(buildUrl(endpoint), { headers: authHeader() })
+		axios({
+			method,
+			url: buildUrl(endpoint),
+			data: JSON.stringify(data),
+			headers: Object.assign({ "Content-Type": "application/json" }, authHeader()),
+		})
 			.then((response: AxiosResponse) => resolve(response.data))
-			.catch((error: AxiosResponse) => {
-				if (error.response.status === 401 && useStore()) useStore().dispatch("auth/logout");
+			.catch((error: any) => {
+				if (error.response && error.response.status === 401) {
+					store.dispatch("auth/logout");
+				}
 				reject(error);
 			});
 	});
+}
+
+export function getRequest(endpoint: string) {
+	return request("get", endpoint);
 }
 
 export function postRequest(endpoint: string, data: object) {
-	return new Promise((resolve, reject) => {
-		axios
-			.post(buildUrl(endpoint), JSON.stringify(data), {
-				headers: Object.assign({ "Content-Type": "application/json" }, authHeader()),
-			})
-			.then((response: AxiosResponse) => resolve(response.data))
-			.catch((error: AxiosResponse) => {
-				if (error.response.status === 401) localStorage.removeItem("accessToken");
-				reject(error);
-			});
-	});
+	return request("post", endpoint, data);
 }
 
 export function patchRequest(endpoint: string, data: object) {
-	return new Promise((resolve, reject) => {
-		axios
-			.patch(buildUrl(endpoint), JSON.stringify(data), {
-				headers: Object.assign({ "Content-Type": "application/json" }, authHeader()),
-			})
-			.then((response: AxiosResponse) => resolve(response.data))
-			.catch((error: AxiosResponse) => {
-				if (error.response.status === 401) localStorage.removeItem("accessToken");
-				reject(error);
-			});
-	});
+	return request("patch", endpoint, data);
 }

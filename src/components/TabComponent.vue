@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { type Component, type Ref, ref } from "vue";
 
 defineProps<{
@@ -18,8 +18,8 @@ const selectedTab: Ref<number> = ref(0);
 			<li
 				v-for="(tab, i) in tabs"
 				:key="i"
-				class="cursor-pointer rounded-t-md px-4 py-0.5 whitespace-nowrap"
 				:class="selectedTab === i ? 'selectedTab' : 'notSelectedTab'"
+				class="cursor-pointer rounded-t-md px-4 py-0.5 whitespace-nowrap"
 				@click="selectedTab = i"
 			>
 				{{ tab.name }}

@@ -1,17 +1,22 @@
 <script lang="ts" setup>
-import { getArtists, postArtist } from "@/services/artistService";
+import type { eventType } from "@/types";
 import ModalComponent from "@/components/ModalComponent.vue";
-import { ref, type Ref } from "vue";
-import type { artistType } from "@/types";
-import ArtistEditComponent from "@/components/artists/ArtistEditComponent.vue";
+import { type Ref, ref } from "vue";
+import { getEvents } from "@/services/eventService";
+import EventEditComponent from "@/components/events/EventEditComponent.vue";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import CardComponent from "@/components/CardComponent.vue";
 
-const artists: Ref<artistType[]> = ref(await getArtists());
+const events: Ref<eventType[]> = ref(await getEvents());
 
-const newArtist: Ref<artistType> = ref({
-	name: "Test",
+const newEvent: Ref<eventType> = ref({
+	price: "",
+	name: "",
+	website: "",
+	venue: {
+		venueId: "",
+	},
 });
 
 const isModalOpened = ref(false);
@@ -22,11 +27,9 @@ const openModal = () => {
 const closeModal = async () => {
 	isModalOpened.value = false;
 };
-
-const saveArtist = async () => {
+const saveEvent = async () => {
 	try {
-		await postArtist(newArtist.value);
-		artists.value = await getArtists();
+		events.value = await getEvents();
 	} catch (exception) {
 		// TODO Error-Handling
 	} finally {
@@ -34,28 +37,30 @@ const saveArtist = async () => {
 	}
 };
 </script>
+
 <template>
 	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
 		<CardComponent
-			v-for="artist in artists"
-			:key="artist.artistId"
-			:label="artist.name"
-			:to="'/artist/' + artist.artistId"
+			v-for="event in events"
+			:key="event.eventId"
+			:label="event.name!"
+			:to="'/event/' + event.eventId"
+			:image-url="event.imageUrl"
 		></CardComponent>
 
 		<div class="listCircle" @click="openModal">
 			<FontAwesomeIcon :icon="faPlus" size="3x"></FontAwesomeIcon>
 		</div>
-		<ModalComponent :is-open="isModalOpened" name="first-modal" @click-outside="closeModal">
+		<ModalComponent :is-open="isModalOpened" @click-outside="closeModal">
 			<template #content>
 				<Suspense>
-					<ArtistEditComponent :artist="newArtist"></ArtistEditComponent>
+					<EventEditComponent :event="newEvent"></EventEditComponent>
 				</Suspense>
 				<div class="w-full flex justify-evenly">
 					<button @click="closeModal">
 						{{ $t("Close") }}
 					</button>
-					<button @click="saveArtist">{{ $t("Save") }}</button>
+					<button @click="saveEvent">{{ $t("Save") }}</button>
 				</div>
 			</template>
 		</ModalComponent>

@@ -1,10 +1,13 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { splitType } from "@/types";
 import { getSplits, postSplit } from "@/services/splitService";
 import ModalComponent from "@/components/ModalComponent.vue";
 import SplitEditComponent from "@/components/splits/SplitEditComponent.vue";
 import { computed, type Ref, ref } from "vue";
 import { useStore } from "vuex";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CardComponent from "@/components/CardComponent.vue";
 
 const store = useStore();
 const user = computed(() => store.state.auth.user);
@@ -28,6 +31,7 @@ const isModalOpened = ref(false);
 const openModal = () => {
 	isModalOpened.value = true;
 };
+
 const closeModal = async () => {
 	isModalOpened.value = false;
 };
@@ -46,19 +50,16 @@ const saveSplit = async () => {
 
 <template>
 	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
-		<RouterLink v-for="split in splits" :key="split.splitId" :to="'/split/' + split.splitId">
-			<div
-				class="w-56 h-56 flex flex-col justify-end items-stretch shadow-2xl shadow-black rounded-2xl overflow-hidden bg-[url('https://www.eventim.de/obj/media/DE-eventim/teaser/artworks/2024/ice-nine-kills-tickets-header.jpg')]"
-			>
-				<p class="bg-white text-center text-2xl pb-2">{{ split.event!.name }}</p>
-			</div>
-		</RouterLink>
+		<CardComponent
+			v-for="split in splits"
+			:key="split.splitId"
+			:label="split.event?.name!"
+			:to="'/split/' + split.splitId"
+			:image-url="split.event?.imageUrl"
+		></CardComponent>
 
-		<div
-			class="w-56 h-56 flex flex-col justify-end items-stretch shadow-2xl shadow-black rounded-2xl overflow-hidden"
-			@click="openModal"
-		>
-			<h1>ADD</h1>
+		<div class="listCircle" @click="openModal">
+			<FontAwesomeIcon :icon="faPlus" size="3x"></FontAwesomeIcon>
 		</div>
 		<ModalComponent :is-open="isModalOpened" name="first-modal" @click-outside="closeModal">
 			<template #content>

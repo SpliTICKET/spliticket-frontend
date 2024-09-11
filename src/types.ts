@@ -4,7 +4,12 @@ export type userType = {
 	email?: string;
 	firstName?: string;
 	lastName?: string;
-	moderator?: boolean;
+	permissions?: permissionType[];
+};
+
+export type permissionType = {
+	permissionId?: string;
+	name: string;
 };
 
 export type addressType = {
@@ -28,6 +33,8 @@ export type eventType = {
 	venue?: venueType;
 	artists?: artistType[];
 	website?: string;
+	imageUrl?: string;
+	date?: string;
 };
 
 export type splitType = {

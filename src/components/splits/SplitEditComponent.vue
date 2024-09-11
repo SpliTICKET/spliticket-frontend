@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { eventType, splitType } from "@/types";
 import { getEvents } from "@/services/eventService";
 
@@ -10,13 +10,14 @@ const events: eventType[] = await getEvents();
 </script>
 
 <template>
-	<div class="flex flex-col justify-center items-center">
+	<div class="flex flex-col justify-center items-center gap-2">
 		<h1 class="text-2xl">{{ split.splitId ? $t("Edit Split") : $t("Create Split") }}</h1>
-		<div>
-			<select v-model="split.event!.eventId">
-				<option value="" disabled selected>{{ $t("Choose an event...") }}</option>
+
+		<div class="w-96">
+			<select v-model="split.event!.eventId" class="genericSelect">
+				<option disabled selected value="">{{ $t("Choose an event...") }}</option>
 				<option v-for="event in events" :key="event.eventId" :value="event.eventId">
-					{{ event.name }}
+					{{ event.name + $d(new Date(event.date!), "short") }}
 				</option>
 			</select>
 		</div>
@@ -31,12 +32,12 @@ const events: eventType[] = await getEvents();
 					<th class="w-2/12"></th>
 				</tr>
 			</thead>
-			<tbody class="bg-white">
+			<tbody class="bg-white dark:bg-gray-700">
 				<tr v-for="(splitParticipant, i) in split.splitParticipants!.filter(() => true)" :key="i">
 					<td class="h-7">
-						<input v-model="splitParticipant.name" type="text" />
+						<input v-model="splitParticipant.name" type="text" class="dark:bg-gray-700"/>
 					</td>
-					<td class="bg-opacity-70 h-7 flex justify-center">
+					<td class="bg-opacity-70 flex justify-center">
 						<select v-model="splitParticipant.hasPaid">
 							<option :value="true">{{ $t("Yes") }}</option>
 							<option :value="false">{{ $t("No") }}</option>

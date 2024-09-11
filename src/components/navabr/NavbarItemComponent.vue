@@ -1,19 +1,34 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+import { useRoute, useRouter } from "vue-router";
+
 interface NavbarItemProps {
 	to: string;
 	label: string;
 }
 
-withDefaults(defineProps<NavbarItemProps>(), {
+const props = withDefaults(defineProps<NavbarItemProps>(), {
 	to: "Home",
 	label: "Home",
 });
 </script>
 
 <template>
-	<RouterLink :to="{ name: to }">
+	<RouterLink
+		:class="{
+			selected:
+				useRouter()
+					.getRoutes()
+					.find((route) => route.name === props.to)?.path === useRoute().fullPath,
+		}"
+		:to="{ name: to }"
+		class="text-black hover:text-white transition-all duration-200 origin-bottom"
+	>
 		{{ label }}
 	</RouterLink>
 </template>
 
-<style scoped></style>
+<style scoped>
+.selected {
+	@apply text-white;
+}
+</style>

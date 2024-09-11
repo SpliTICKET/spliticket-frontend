@@ -3,5 +3,24 @@
 @tailwind utilities;
 
 .test-border {
-	@apply border-2 border-red-900;
+    @apply border-2 border-red-900;
+}
+
+.listCircle {
+    @apply m-6 w-44 h-44 flex flex-col justify-center items-stretch shadow-2xl rounded-full border-2
+    border-gray-200 text-green-900
+    dark:border-gray-600
+    overflow-hidden hover:scale-110 transition-all duration-200 scale-100 cursor-pointer;
+}
+
+select {
+    @apply w-full p-2 rounded-lg bg-gray-300 dark:bg-gray-600;
+}
+
+input {
+	@apply px-2 py-1 text-center align-middle rounded-md bg-gray-300 placeholder-gray-500 dark:bg-gray-600;
+}
+
+.genericButton {
+	@apply w-full px-2 py-1 rounded-md bg-green-700 text-white;
 }
