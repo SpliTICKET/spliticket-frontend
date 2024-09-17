@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import type { splitType, venueType } from "@/types";
-import { getSplits, postSplit } from "@/services/splitService";
+import type { venueType } from "@/types";
 import ModalComponent from "@/components/ModalComponent.vue";
-import SplitEditComponent from "@/components/splits/SplitEditComponent.vue";
 import { computed, type Ref, ref } from "vue";
 import { useStore } from "vuex";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
