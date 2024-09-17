@@ -7,7 +7,13 @@ defineProps<{
 </script>
 
 <template>
-	<div>{{ artist }}</div>
+	<div class="flex flex-col justify-center items-center">
+		<h1 class="text-2xl">{{ artist.artistId ? $t("Edit artist") : $t("Create artist") }}</h1>
+		<div>
+			<input v-model="artist.name"/>
+		</div>
+	</div>
+
 </template>
 
 <style scoped></style>

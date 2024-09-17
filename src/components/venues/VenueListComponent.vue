@@ -1,17 +1,26 @@
 <script lang="ts" setup>
-import { getArtists, postArtist } from "@/services/artistService";
+import type { splitType, venueType } from "@/types";
+import { getSplits, postSplit } from "@/services/splitService";
 import ModalComponent from "@/components/ModalComponent.vue";
-import { ref, type Ref } from "vue";
-import type { artistType } from "@/types";
-import ArtistEditComponent from "@/components/artists/ArtistEditComponent.vue";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import SplitEditComponent from "@/components/splits/SplitEditComponent.vue";
+import { computed, type Ref, ref } from "vue";
+import { useStore } from "vuex";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CardComponent from "@/components/CardComponent.vue";
+import { getVenues, postVenue } from "@/services/venueService";
+import VenueEditComponent from "@/components/venues/VenueEditComponent.vue";
 
-const artists: Ref<artistType[]> = ref(await getArtists());
+const store = useStore();
+const user = computed(() => store.state.auth.user);
 
-const newArtist: Ref<artistType> = ref({
+const venues: Ref<venueType[]> = ref(await getVenues());
+
+const newVenue: Ref<venueType> = ref({
 	name: "",
+	address: null,
+	events: [],
+	website: ""
 });
 
 const isModalOpened = ref(false);
@@ -19,28 +28,32 @@ const isModalOpened = ref(false);
 const openModal = () => {
 	isModalOpened.value = true;
 };
+
 const closeModal = async () => {
 	isModalOpened.value = false;
 };
 
-const saveArtist = async () => {
+const saveVenue = async () => {
 	try {
-		await postArtist(newArtist.value);
-		artists.value = await getArtists();
+		await postVenue(newVenue.value);
+		venues.value = await getVenues();
 	} catch (exception) {
 		// TODO Error-Handling
+		console.error(exception);
 	} finally {
 		isModalOpened.value = false;
 	}
 };
 </script>
+
 <template>
 	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
 		<CardComponent
-			v-for="artist in artists"
-			:key="artist.artistId"
-			:label="artist.name"
-			:to="'/artist/' + artist.artistId"
+			v-for="venue in venues"
+			:key="venue.venueId"
+			:label="venue.name!"
+			:to="'/venue/' + venue.venueId"
+			:image-url="null"
 		></CardComponent>
 
 		<div class="listCircle" @click="openModal">
@@ -49,13 +62,13 @@ const saveArtist = async () => {
 		<ModalComponent :is-open="isModalOpened" name="first-modal" @click-outside="closeModal">
 			<template #content>
 				<Suspense>
-					<ArtistEditComponent :artist="newArtist"></ArtistEditComponent>
+					<VenueEditComponent :venue="newVenue"></VenueEditComponent>
 				</Suspense>
 				<div class="w-full flex justify-evenly">
 					<button @click="closeModal">
 						{{ $t("Close") }}
 					</button>
-					<button @click="saveArtist">{{ $t("Save") }}</button>
+					<button @click="saveVenue">{{ $t("Save") }}</button>
 				</div>
 			</template>
 		</ModalComponent>
