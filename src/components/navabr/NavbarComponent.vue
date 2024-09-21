@@ -20,11 +20,11 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-	<div class="bg-green-900 w-full z-30  px-4">
+	<div class="bg-green-900 w-full z-30 px-4">
 		<div class="h-14 flex flex-row justify-between items-center">
-			<RouterLink :to="user ? '/dashboard' : '/'" class="text-4xl align-middle">SpliTICKET</RouterLink>
+			<RouterLink :to="user ? '/dashboard' : '/'" class="text-4xl align-middle text-white">SpliTICKET</RouterLink>
 
-			<button @click="isMenuOpen = !isMenuOpen" class="lg:hidden w-10">
+			<button v-if="!!user" class="lg:hidden w-10" @click="isMenuOpen = !isMenuOpen">
 				<IconMenu class="text-white"></IconMenu>
 			</button>
 
@@ -49,11 +49,11 @@ const toggleDark = useToggle(isDark);
 						<ToggleSwitchComponent :is-active="isDark" :toggle-active="toggleDark" />
 						<button
 							@click="
-							() => {
-								logout();
-								$router.go(0);
-							}
-						"
+								() => {
+									logout();
+									$router.go(0);
+								}
+							"
 						>
 							{{ $t("Logout") }}
 						</button>
@@ -71,22 +71,47 @@ const toggleDark = useToggle(isDark);
 		</div>
 
 		<div v-if="!!user && isMenuOpen" class="lg:hidden bg-green-900 text-white text-2xl flex flex-col gap-4 p-4">
-			<NavbarItemComponent :label="$t('Dashboard')" to="Dashboard"></NavbarItemComponent>
-			<NavbarItemComponent v-if="moderatorView" :label="$t('Artists')" to="Artists"></NavbarItemComponent>
-			<NavbarItemComponent v-if="moderatorView" :label="$t('Venues')" to="Venues"></NavbarItemComponent>
-			<NavbarItemComponent v-if="moderatorView" :label="$t('Events')" to="Events"></NavbarItemComponent>
-			<NavbarItemComponent :label="$t('Splits')" to="Splits"></NavbarItemComponent>
+			<NavbarItemComponent
+				:label="$t('Dashboard')"
+				to="Dashboard"
+				@click="isMenuOpen = false"
+			></NavbarItemComponent>
+			<NavbarItemComponent
+				v-if="moderatorView"
+				:label="$t('Artists')"
+				to="Artists"
+				@click="isMenuOpen = false"
+			></NavbarItemComponent>
+			<NavbarItemComponent
+				v-if="moderatorView"
+				:label="$t('Venues')"
+				to="Venues"
+				@click="isMenuOpen = false"
+			></NavbarItemComponent>
+			<NavbarItemComponent
+				v-if="moderatorView"
+				:label="$t('Events')"
+				to="Events"
+				@click="isMenuOpen = false"
+			></NavbarItemComponent>
+			<NavbarItemComponent :label="$t('Splits')" to="Splits" @click="isMenuOpen = false"></NavbarItemComponent>
 
 			<div class="border-t-2 border-green-800 mt-2 pt-2">
 				<ToggleSwitchComponent :is-active="isDark" :toggle-active="toggleDark" />
-				<button @click="() => { logout(); $router.go(0); }">
+				<button
+					@click="
+						() => {
+							logout();
+							$router.go(0);
+						}
+					"
+				>
 					{{ $t("Logout") }}
 				</button>
 			</div>
 		</div>
 	</div>
 </template>
-
 
 <style scoped>
 .user-menu > button {

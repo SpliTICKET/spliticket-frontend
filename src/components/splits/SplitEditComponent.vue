@@ -35,7 +35,7 @@ const events: eventType[] = await getEvents();
 			<tbody class="bg-white dark:bg-gray-700">
 				<tr v-for="(splitParticipant, i) in split.splitParticipants!.filter(() => true)" :key="i">
 					<td class="h-7">
-						<input v-model="splitParticipant.name" type="text" class="dark:bg-gray-700"/>
+						<input v-model="splitParticipant.name" type="text" class="dark:bg-gray-700" />
 					</td>
 					<td class="bg-opacity-70 flex justify-center">
 						<select v-model="splitParticipant.hasPaid">

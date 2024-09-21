@@ -3,7 +3,13 @@ import type { Config } from "tailwindcss";
 export default {
 	darkMode: "class",
 	theme: {
-		extend: {},
+		extend: {
+			width: {
+				"128": "32rem",
+				"144": "36rem",
+				"160": "40rem",
+			},
+		},
 	},
 	variants: {
 		extend: {},

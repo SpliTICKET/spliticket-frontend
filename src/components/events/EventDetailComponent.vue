@@ -3,15 +3,13 @@ import { ref } from "vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import { getEvent, patchEvent } from "@/services/eventService";
 import EventEditComponent from "@/components/events/EventEditComponent.vue";
+import EventBannerComponent from "@/components/events/EventBannerComponent.vue";
 
 const props = defineProps<{
 	eventId: string;
 }>();
 
 const event = ref(await getEvent(props.eventId));
-const address = event.value.venue!.address!;
-const addressString = `${address.street} ${address.houseNumber}, ${address.postalCode} ${address.city}, ${address.country}`;
-
 const isModalOpened = ref(false);
 
 const openModal = () => {
@@ -29,19 +27,13 @@ const saveEvent = async () => {
 </script>
 
 <template>
-	<div class="w-full h-full">
-		<div class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4">
-			<div class="w-full flex flex-col items-center gap-8">
-				<h1 class="text-2xl">{{ event.name }}</h1>
-				<div class="flex flex-col items-center gap-2">
-					<a :href="event.venue!.website" target="_blank">{{ event.venue!.name }}</a>
-					<a :href="'https://www.google.de/maps/place/' + addressString" target="_blank">{{
-						addressString
-					}}</a>
-					<p>{{ event.price }}</p>
-				</div>
-			</div>
-			<div class="w-10/12 border-b-2 border-gray-200" />
+	<div class="w-full h-full flex flex-col items-center justify-start mb-10">
+		<div
+			class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4 lg:w-2/3"
+		>
+			<EventBannerComponent :event="event"></EventBannerComponent>
+
+			<div class="w-10/12 border-b-2 border-gray-200 dark:border-gray-700" />
 			<div class="w-full flex justify-center"></div>
 
 			<button @click="openModal">Bearbeiten</button>

@@ -20,6 +20,11 @@ export type addressType = {
 	country: string;
 };
 
+export type priceType = {
+	amount: number;
+	currency: string;
+};
+
 export type artistType = {
 	artistId?: string;
 	name?: string;
@@ -28,7 +33,7 @@ export type artistType = {
 
 export type eventType = {
 	eventId?: string;
-	price?: string;
+	price?: priceType;
 	name?: string;
 	venue?: venueType;
 	artists?: artistType[];

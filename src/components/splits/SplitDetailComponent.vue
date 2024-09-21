@@ -7,15 +7,13 @@ import { computed, type Ref, ref } from "vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import SplitEditComponent from "@/components/splits/SplitEditComponent.vue";
 import type { splitParticipantType, userType } from "@/types";
+import EventBannerComponent from "@/components/events/EventBannerComponent.vue";
 
 const props = defineProps<{
 	splitId: string;
 }>();
 
 const split = ref(await getSplit(props.splitId));
-const address = split.value.event!.venue!.address!;
-const addressString = `${address.street} ${address.houseNumber}, ${address.postalCode} ${address.city}, ${address.country}`;
-
 const store = useStore();
 const user: Ref<userType> = computed(() => store.state.auth.user || { username: "" });
 
@@ -50,22 +48,11 @@ const addSplitParticipant = async () => {
 </script>
 
 <template>
-	<div class="w-full h-full">
-		<div class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4">
-			<div class="relative w-full">
-				<img :src="split.event?.imageUrl" alt="Background Image" class="w-full h-auto rounded-xl" />
-
-				<div class="absolute inset-0 w-1/2 flex flex-col justify-center items-center gap-8 text-gray-200 p-10">
-					<h1 class="text-2xl">{{ split.event!.name }}</h1>
-					<div class="flex flex-col items-center gap-2">
-						<a :href="split.event!.venue!.website" target="_blank">{{ split.event!.venue!.name }}</a>
-						<a :href="'https://www.google.de/maps/place/' + addressString" target="_blank">{{
-							addressString
-						}}</a>
-						<p>{{ split.event!.price }}</p>
-					</div>
-				</div>
-			</div>
+	<div class="w-full h-full flex flex-col items-center justify-start mb-10">
+		<div
+			class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4 lg:w-2/3"
+		>
+			<EventBannerComponent :event="split.event"></EventBannerComponent>
 
 			<div class="w-10/12 border-b-2 border-gray-200 dark:border-gray-700" />
 			<div class="w-full flex justify-center">

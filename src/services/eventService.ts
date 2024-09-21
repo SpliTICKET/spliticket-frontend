@@ -1,8 +1,12 @@
-import { getRequest, patchRequest } from "@/requests";
+import { getRequest, patchRequest, postRequest } from "@/requests";
 import type { eventType } from "@/types";
 
 export function getEvents(): Promise<eventType[]> {
 	return getRequest("/event").catch(() => null) as Promise<eventType[]>;
+}
+
+export function postEvent(event: eventType): Promise<eventType> {
+	return postRequest(`/event`, event).catch(() => null) as Promise<eventType>;
 }
 
 export function getEvent(eventId: string): Promise<eventType> {

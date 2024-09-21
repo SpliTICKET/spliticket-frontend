@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import { getVenue, patchVenue } from "@/services/venueService";
-import { useStore } from "vuex";
-import { computed, type Ref, ref } from "vue";
+import { ref } from "vue";
 import ModalComponent from "@/components/ModalComponent.vue";
-import type { userType } from "@/types";
 import VenueEditComponent from "@/components/venues/VenueEditComponent.vue";
 
 const props = defineProps<{
@@ -11,9 +9,6 @@ const props = defineProps<{
 }>();
 
 const venue = ref(await getVenue(props.venueId));
-
-const store = useStore();
-const user: Ref<userType> = computed(() => store.state.auth.user || { username: "" });
 
 const isModalOpened = ref(false);
 
@@ -27,7 +22,7 @@ const closeModal = async () => {
 };
 
 const saveVenue = async () => {
-	split.value = await patchVenue(props.venueId, venue.value);
+	venue.value = await patchVenue(props.venueId, venue.value);
 	isModalOpened.value = false;
 };
 </script>
@@ -40,7 +35,7 @@ const saveVenue = async () => {
 					<h1 class="text-2xl">{{ venue.name }}</h1>
 					<div class="flex flex-col items-center gap-2">
 						<a :href="venue.website" target="_blank">{{ venue.name }}</a>
-<!--						<a :href="'https://www.google.de/maps/place/' + addressString" target="_blank">{{
+						<!--						<a :href="'https://www.google.de/maps/place/' + addressString" target="_blank">{{
 							addressString
 						}}</a>-->
 					</div>

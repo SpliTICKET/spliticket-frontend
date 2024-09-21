@@ -2,7 +2,7 @@
 import type { eventType } from "@/types";
 import ModalComponent from "@/components/ModalComponent.vue";
 import { type Ref, ref } from "vue";
-import { getEvents } from "@/services/eventService";
+import { getEvents, postEvent } from "@/services/eventService";
 import EventEditComponent from "@/components/events/EventEditComponent.vue";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -29,6 +29,15 @@ const closeModal = async () => {
 };
 const saveEvent = async () => {
 	try {
+		await postEvent(newEvent.value);
+		newEvent.value = {
+			price: "",
+			name: "",
+			website: "",
+			venue: {
+				venueId: "",
+			},
+		};
 		events.value = await getEvents();
 	} catch (exception) {
 		// TODO Error-Handling

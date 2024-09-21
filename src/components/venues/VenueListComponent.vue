@@ -1,16 +1,12 @@
 <script lang="ts" setup>
 import type { venueType } from "@/types";
 import ModalComponent from "@/components/ModalComponent.vue";
-import { computed, type Ref, ref } from "vue";
-import { useStore } from "vuex";
+import { type Ref, ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import CardComponent from "@/components/CardComponent.vue";
 import { getVenues, postVenue } from "@/services/venueService";
 import VenueEditComponent from "@/components/venues/VenueEditComponent.vue";
-
-const store = useStore();
-const user = computed(() => store.state.auth.user);
 
 const venues: Ref<venueType[]> = ref(await getVenues());
 
@@ -18,7 +14,7 @@ const newVenue: Ref<venueType> = ref({
 	name: "",
 	address: null,
 	events: [],
-	website: ""
+	website: "",
 });
 
 const isModalOpened = ref(false);
