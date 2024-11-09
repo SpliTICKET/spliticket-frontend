@@ -7,10 +7,16 @@
 }
 
 .listCircle {
-	@apply m-6 w-44 h-44 flex flex-col justify-center items-stretch shadow-2xl rounded-full border-2
+	@apply m-6 w-24 h-24 flex flex-col justify-center items-stretch shadow-2xl rounded-full border-2
     border-gray-200 text-green-900
     dark:border-gray-600
     overflow-hidden hover:scale-110 transition-all duration-200 scale-100 cursor-pointer;
+}
+
+@screen md {
+	.listCircle {
+		@apply w-44 h-44;
+	}
 }
 
 select {
@@ -21,6 +27,18 @@ input {
 	@apply px-2 py-1 text-center align-middle rounded-md bg-gray-300 placeholder-gray-500 dark:bg-gray-600;
 }
 
-.genericButton {
-	@apply w-full px-2 py-1 rounded-md bg-green-700 text-white;
+@layer components {
+	.genericButton {
+		@apply px-2 py-1 rounded-md bg-green-700 text-white;
+	}
+}
+
+.cardList {
+	@apply w-full flex flex-wrap items-center justify-evenly gap-4 pt-10;
+}
+
+@screen md {
+	.cardList {
+		@apply gap-8 p-24 justify-center;
+	}
 }

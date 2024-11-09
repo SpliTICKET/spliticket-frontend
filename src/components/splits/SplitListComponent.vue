@@ -49,7 +49,7 @@ const saveSplit = async () => {
 </script>
 
 <template>
-	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
+	<div class="cardList">
 		<CardComponent
 			v-for="split in splits"
 			:key="split.splitId"
@@ -67,10 +67,10 @@ const saveSplit = async () => {
 					<SplitEditComponent :split="newSplit"></SplitEditComponent>
 				</Suspense>
 				<div class="w-full flex justify-evenly">
-					<button @click="closeModal">
+					<button class="genericButton bg-red-600" @click="closeModal">
 						{{ $t("Close") }}
 					</button>
-					<button @click="saveSplit">{{ $t("Save") }}</button>
+					<button class="genericButton" @click="saveSplit">{{ $t("Save") }}</button>
 				</div>
 			</template>
 		</ModalComponent>

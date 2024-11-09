@@ -15,7 +15,11 @@ const moderatorView = computed(() => store.getters["auth/isModerator"]);
 const profileDialogOpened: Ref<boolean> = ref(false);
 const isMenuOpen: Ref<boolean> = ref(false);
 
-const isDark = useDark();
+const isDark = useDark({
+	initialValue: "light",
+	storageKey: "spliticket-color-scheme",
+	listenToStorageChanges: false,
+});
 const toggleDark = useToggle(isDark);
 </script>
 

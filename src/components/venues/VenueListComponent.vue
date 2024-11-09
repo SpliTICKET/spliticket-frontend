@@ -12,7 +12,7 @@ const venues: Ref<venueType[]> = ref(await getVenues());
 
 const newVenue: Ref<venueType> = ref({
 	name: "",
-	address: null,
+	address: undefined,
 	events: [],
 	website: "",
 });
@@ -41,13 +41,13 @@ const saveVenue = async () => {
 </script>
 
 <template>
-	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
+	<div class="cardList">
 		<CardComponent
 			v-for="venue in venues"
 			:key="venue.venueId"
 			:label="venue.name!"
 			:to="'/venue/' + venue.venueId"
-			:image-url="null"
+			:image-url="''"
 		></CardComponent>
 
 		<div class="listCircle" @click="openModal">

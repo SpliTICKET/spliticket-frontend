@@ -13,8 +13,8 @@ const events: eventType[] = await getEvents();
 	<div class="flex flex-col justify-center items-center gap-2">
 		<h1 class="text-2xl">{{ split.splitId ? $t("Edit Split") : $t("Create Split") }}</h1>
 
-		<div class="w-96">
-			<select v-model="split.event!.eventId" class="genericSelect">
+		<div>
+			<select v-model="split.event!.eventId" class="genericSelect" :disabled="!!split.splitId">
 				<option disabled selected value="">{{ $t("Choose an event...") }}</option>
 				<option v-for="event in events" :key="event.eventId" :value="event.eventId">
 					{{ event.name + $d(new Date(event.date!), "short") }}
@@ -23,7 +23,7 @@ const events: eventType[] = await getEvents();
 		</div>
 
 		<table
-			class="w-96 border-4 border-green-700 rounded-2xl bg-green-700 border-separate border-spacing-0 text-center"
+			class="border-4 border-green-700 overflow-hidden rounded-2xl bg-green-700 border-separate border-spacing-0 text-center"
 		>
 			<thead>
 				<tr class="h-7 text-white">
@@ -51,7 +51,9 @@ const events: eventType[] = await getEvents();
 				</tr>
 			</tbody>
 		</table>
-		<button @click="() => split.splitParticipants!.push({ name: '', hasPaid: false })">Add</button>
+		<button class="genericButton mb-4" @click="() => split.splitParticipants!.push({ name: '', hasPaid: false })">
+			{{ $t("Add") }}
+		</button>
 	</div>
 </template>
 

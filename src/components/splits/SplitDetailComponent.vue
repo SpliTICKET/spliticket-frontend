@@ -19,6 +19,7 @@ const user: Ref<userType> = computed(() => store.state.auth.user || { username: 
 
 const isModalOpened = ref(false);
 const newParticipantName = ref(user.value ? user.value!.firstName : "");
+const participantAdded = ref(false);
 
 const openModal = () => {
 	isModalOpened.value = true;
@@ -43,6 +44,7 @@ const addSplitParticipant = async () => {
 
 	await postSplitParticipant(props.splitId, newSplitParticipant);
 	newParticipantName.value = "";
+	participantAdded.value = true;
 	await closeModal();
 };
 </script>
@@ -50,14 +52,14 @@ const addSplitParticipant = async () => {
 <template>
 	<div class="w-full h-full flex flex-col items-center justify-start mb-10">
 		<div
-			class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4 lg:w-2/3"
+			class="flex flex-col justify-center items-center gap-2 md:gap-4 md:m-10 rounded-2xl md:shadow-gray-600 md:shadow-2xl md:p-4 w-full md:w-2/3"
 		>
-			<EventBannerComponent :event="split.event"></EventBannerComponent>
+			<EventBannerComponent v-if="!!split.event" :event="split.event"></EventBannerComponent>
 
 			<div class="w-10/12 border-b-2 border-gray-200 dark:border-gray-700" />
-			<div class="w-full flex justify-center">
+			<div class="w-full flex justify-center p-6 md:p-0">
 				<table
-					class="w-3/6 border-4 border-green-700 rounded-2xl bg-green-700 border-separate border-spacing-0 text-center"
+					class="w-full md:w-3/6 border-4 border-green-700 overflow-hidden rounded-2xl bg-green-700 border-separate border-spacing-0 text-center"
 				>
 					<thead>
 						<tr class="h-7">
@@ -82,11 +84,14 @@ const addSplitParticipant = async () => {
 				</table>
 			</div>
 			<div v-if="split.owner!.username === user.username">
-				<button @click="openModal">Bearbeiten</button>
+				<button class="genericButton" @click="openModal">Bearbeiten</button>
 			</div>
-			<div v-else class="flex gap-1">
+			<div v-else-if="!participantAdded" class="flex flex-col md:flex-row gap-1 mb-10 md:mb-0">
 				<input v-model="newParticipantName" placeholder="John Doe" />
 				<button class="genericButton" @click="addSplitParticipant()">Setz mich auf die Liste!</button>
+			</div>
+			<div v-else class="mb-10 md:mb-0 text-green-700">
+				<p>Du wurdest erfolgreich zum Split hinzugefügt!</p>
 			</div>
 
 			<ModalComponent :is-open="isModalOpened" name="first-modal" @click-outside="closeModal">
@@ -94,11 +99,11 @@ const addSplitParticipant = async () => {
 					<Suspense>
 						<SplitEditComponent :split="split"></SplitEditComponent>
 					</Suspense>
-					<div class="w-full flex justify-evenly">
-						<button @click="closeModal">
+					<div class="flex justify-evenly">
+						<button class="genericButton bg-red-700" @click="closeModal">
 							{{ $t("Close") }}
 						</button>
-						<button @click="saveSplit">{{ $t("Save") }}</button>
+						<button class="genericButton" @click="saveSplit">{{ $t("Save") }}</button>
 					</div>
 				</template>
 			</ModalComponent>

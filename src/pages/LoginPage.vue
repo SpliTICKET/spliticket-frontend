@@ -46,12 +46,16 @@ const handleLogin = () => {
 				<input v-model="user.password" type="password" name="password" required />
 			</div>
 			<div>
-				<button :disabled="loading" class="border-2 rounded px-2">
+				<button :disabled="loading" class="genericButton">
 					<span>{{ $t("Login") }}</span>
 				</button>
 			</div>
 			<div class="flex flex-col text-sm items-center">
-				<p>Haven't registered yet? Register <a href="/register" class="text-green-500">here</a>!</p>
+				<p>
+					{{ $t("Haven't registered yet?") }} {{ $t("Please register") }}
+					<a href="/register" class="text-green-500">{{ $t("here") }}</a>
+					!
+				</p>
 			</div>
 			<div>
 				<div v-if="message">{{ message }}</div>

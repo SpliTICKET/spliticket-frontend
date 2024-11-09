@@ -11,7 +11,10 @@ import CardComponent from "@/components/CardComponent.vue";
 const events: Ref<eventType[]> = ref(await getEvents());
 
 const newEvent: Ref<eventType> = ref({
-	price: "",
+	price: {
+		amount: 0,
+		currency: "EUR",
+	},
 	name: "",
 	website: "",
 	venue: {
@@ -31,7 +34,10 @@ const saveEvent = async () => {
 	try {
 		await postEvent(newEvent.value);
 		newEvent.value = {
-			price: "",
+			price: {
+				amount: 0,
+				currency: "EUR",
+			},
 			name: "",
 			website: "",
 			venue: {
@@ -48,7 +54,7 @@ const saveEvent = async () => {
 </script>
 
 <template>
-	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
+	<div class="cardList">
 		<CardComponent
 			v-for="event in events"
 			:key="event.eventId"

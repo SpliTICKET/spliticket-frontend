@@ -23,11 +23,17 @@ const selectedArtist = "";
 watch(
 	() => event.value.date,
 	(newDate) => {
-		event.value.date = new Date(newDate).toISOString();
+		event.value.date = new Date(newDate!).toISOString();
 	}
 );
 
 const formattedDate = ref(event.value.date.slice(0, 16));
+
+const updateDate = (inputEvent: Event) => {
+	const input = inputEvent.target as HTMLInputElement;
+	event.value.date = new Date(input.value).toISOString();
+	formattedDate.value = event.value.date.slice(0, 16);
+};
 </script>
 
 <template>
@@ -50,13 +56,13 @@ const formattedDate = ref(event.value.date.slice(0, 16));
 				<label class="text-sm font-medium text-gray-600">{{ $t("Price") }}</label>
 				<div class="flex items-center gap-2">
 					<input
-						v-model="event.price.amount"
+						v-model="event.price!.amount"
 						type="number"
 						class="w-full p-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
 						:placeholder="$t('Amount')"
 					/>
 					<select
-						v-model="event.price.currency"
+						v-model="event.price!.currency"
 						class="border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
 					>
 						<option value="EUR">EUR</option>
@@ -71,7 +77,7 @@ const formattedDate = ref(event.value.date.slice(0, 16));
 					v-model="formattedDate"
 					type="datetime-local"
 					class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-					@change="event.date = new Date($event.target.value).toISOString()"
+					@change="updateDate($event)"
 				/>
 			</div>
 
@@ -139,7 +145,7 @@ const formattedDate = ref(event.value.date.slice(0, 16));
 						{{ artist.name }}
 						<button
 							class="ml-2 text-gray-600 hover:text-gray-800"
-							@click="event.artists = event.artists.filter((a) => a.artistId !== artist.artistId)"
+							@click="event.artists = event.artists!.filter((a) => a.artistId !== artist.artistId)"
 						>
 							&times;
 						</button>

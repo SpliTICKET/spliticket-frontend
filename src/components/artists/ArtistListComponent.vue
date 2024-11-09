@@ -35,12 +35,13 @@ const saveArtist = async () => {
 };
 </script>
 <template>
-	<div class="w-full flex flex-wrap justify-center items-center gap-8 p-24">
+	<div class="cardList">
 		<CardComponent
 			v-for="artist in artists"
 			:key="artist.artistId"
-			:label="artist.name"
+			:label="artist.name!"
 			:to="'/artist/' + artist.artistId"
+			:image-url="''"
 		></CardComponent>
 
 		<div class="listCircle" @click="openModal">

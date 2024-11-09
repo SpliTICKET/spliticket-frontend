@@ -29,12 +29,12 @@ const saveEvent = async () => {
 <template>
 	<div class="w-full h-full flex flex-col items-center justify-start mb-10">
 		<div
-			class="flex flex-col justify-center items-center gap-4 m-10 rounded-2xl shadow-gray-600 shadow-2xl p-4 lg:w-2/3"
+			class="flex flex-col justify-center items-center gap-2 md:gap-4 md:m-10 rounded-2xl md:shadow-gray-600 md:shadow-2xl md:p-4 w-full md:w-2/3"
 		>
 			<EventBannerComponent :event="event"></EventBannerComponent>
 
 			<div class="w-10/12 border-b-2 border-gray-200 dark:border-gray-700" />
-			<div class="w-full flex justify-center"></div>
+			<div class="w-full flex justify-center p-6 md:p-0"></div>
 
 			<button @click="openModal">Bearbeiten</button>
 
