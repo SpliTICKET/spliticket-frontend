@@ -56,6 +56,7 @@ const saveSplit = async () => {
 			:label="split.event?.name!"
 			:to="'/split/' + split.splitId"
 			:image-url="split.event?.imageUrl"
+			:counter="split.splitParticipants?.length"
 		></CardComponent>
 
 		<div class="listCircle" @click="openModal">

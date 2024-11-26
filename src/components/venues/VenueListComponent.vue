@@ -12,7 +12,13 @@ const venues: Ref<venueType[]> = ref(await getVenues());
 
 const newVenue: Ref<venueType> = ref({
 	name: "",
-	address: undefined,
+	address: {
+		street: "",
+		houseNumber: "",
+		city: "",
+		postalCode: "",
+		country: "",
+	},
 	events: [],
 	website: "",
 });

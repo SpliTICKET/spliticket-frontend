@@ -47,6 +47,24 @@ const addSplitParticipant = async () => {
 	participantAdded.value = true;
 	await closeModal();
 };
+
+[
+	{ property: "og:url", content: window.location.href },
+	{ property: "og:type", content: "website" },
+	{ property: "og:title", content: split.value.event?.name || "" },
+	{ property: "og:description", content: "Möchtest du an diesem Event teilnehmen?" },
+	{ property: "og:image", content: split.value.event?.imageUrl || "" },
+].forEach((meta) => {
+	let metaTag = document.querySelector(`meta[property="${meta.property}"]`);
+	if (metaTag) {
+		metaTag.setAttribute("content", meta.content);
+	} else {
+		metaTag = document.createElement("meta");
+		metaTag.setAttribute("property", meta.property);
+		metaTag.setAttribute("content", meta.content);
+		document.head.appendChild(metaTag);
+	}
+});
 </script>
 
 <template>

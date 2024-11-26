@@ -17,7 +17,7 @@ const events: eventType[] = await getEvents();
 			<select v-model="split.event!.eventId" class="genericSelect" :disabled="!!split.splitId">
 				<option disabled selected value="">{{ $t("Choose an event...") }}</option>
 				<option v-for="event in events" :key="event.eventId" :value="event.eventId">
-					{{ event.name + $d(new Date(event.date!), "short") }}
+					{{ event.name + " - " + $d(new Date(event.date!), "short") }}
 				</option>
 			</select>
 		</div>
